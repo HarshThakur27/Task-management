@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+This website allows users to manage tasks with functionalities such as adding, editing, deleting, and marking tasks as completed. It sorts tasks dynamically by priority (high, medium, low) and features a responsive design.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Features
+Add, Edit, and Delete Tasks: Users can create tasks with a title, description, and priority, edit them, or delete them.
+Mark Tasks as Completed: Users can toggle tasks between pending and completed states.
+Dynamic Sorting: Tasks are sorted by priority (High, Medium, Low) with high-priority tasks appearing at the top.
+Responsive Design: The application is styled using Tailwind CSS to ensure a good user experience on various devices.
+Local Storage: Tasks are saved in local storage, allowing them to persist between page reloads.
 
-In the project directory, you can run:
 
-### `npm start`
+Setup Instructions
+To run this project locally, follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone the repository:
+git clone https://github.com/HarshThakur27/Task-management.git
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Navigate to the project directory:
+cd taskmanagement
 
-### `npm test`
+Install the necessary dependencies:
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Start the application:
+npm start
 
-### `npm run build`
+Visit the app 
+https://task-management-orpin-nu.vercel.app/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Sorting Tasks by Priority
+The tasks are sorted dynamically based on their priority level: High, Medium, and Low. The sorting is done in the following way:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+High Priority tasks are assigned the highest value and appear at the top.
+Medium Priority tasks come after high-priority tasks.
+Low Priority tasks are displayed last.
 
-### `npm run eject`
+This sorting is achieved using a custom function that assigns numerical values to priorities and sorts the tasks array accordingly:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+const getPriorityValue = (priority) => {
+    if (priority === "High") return 1;
+    if (priority === "Medium") return 2;
+    return 3;  // Low priority
+};
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+const sortedTasks = tasks.sort((a, b) => getPriorityValue(a.priority) - getPriorityValue(b.priority));
